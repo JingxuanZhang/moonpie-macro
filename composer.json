@@ -12,7 +12,7 @@
     "email": "875010341@qq.com"
   }],
   "require": {
-    "overtrue/easywechat": "^4.1",
+    "overtrue/wechat": "^4.1",
     "ext-bcmath": "*"
   },
   "autoload": {
