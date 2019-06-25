@@ -1,0 +1,24 @@
+{
+  "name": "moonpie/macro",
+  "description": "library for macro app, etc wechat,weapp,spawn,alipay",
+  "version": "1.0.0-dev",
+  "type": "library",
+  "keywords": [
+    "macro application", "weapp", "spawn app"
+  ],
+  "license": "Apache-2.0",
+  "authors": [{
+    "name": "johnzhang",
+    "email": "875010341@qq.com"
+  }],
+  "require": {
+    "overtrue/easywechat": "^4.1",
+    "ext-bcmath": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Moonpie\\Macro\\": "src/"
+    },
+    "classmap": ["aop\\"]
+  }
+}
