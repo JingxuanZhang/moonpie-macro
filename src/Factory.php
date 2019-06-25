@@ -15,26 +15,27 @@ class Factory extends BasicFactory
 {
     /**
      * @param string $name
-     * @param array  $config
+     * @param array $config
      *
      * @return \EasyWeChat\Kernel\ServiceContainer
      */
     public static function make($name, array $config)
     {
         $namespace = Str::studly($name);
-        if(stripos($name, 'byte') === 0) {
+        if (stripos($name, 'byte') === 0) {
             $application = "\\Moonpie\\Macro\\{$namespace}\\Application";
-        }else {
+        } else {
             $application = "\\EasyWeChat\\{$namespace}\\Application";
         }
 
         return new $application($config);
     }
+
     /**
      * Dynamically pass methods to the application.
      *
      * @param string $name
-     * @param array  $arguments
+     * @param array $arguments
      *
      * @return mixed
      */
