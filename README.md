@@ -7,3 +7,18 @@ EasyWechat解决了微信端的，剩下的就交给我吧。
 composer require moonpie/macro
 ```
 ### 用法
+```php
+<?php
+use Moonpie\Macro\Factory;
+$config = [];
+$payment_app = Factory::payment($config);
+$official_app = Factory::officialAccount($config);
+//-----------
+
+//对于抖音应用
+$byte_app = Factory::byteMiniProgram($config);
+$byte_payment_app = Factory::byteMiniPayment($config);
+
+//其他应用后续完善
+
+```

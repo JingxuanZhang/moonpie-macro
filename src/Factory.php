@@ -11,6 +11,12 @@ namespace Moonpie\Macro;
 use EasyWeChat\Factory as BasicFactory;
 use EasyWeChat\Kernel\Support\Str;
 
+/**
+ * Class Factory
+ * @method static \Moonpie\Macro\ByteMiniPayment\Application        byteMiniPayment(array $config)
+ * @method static \Moonpie\Macro\ByteMiniProgram\Application        byteMiniProgram(array $config)
+ * @package Moonpie\Macro
+ */
 class Factory extends BasicFactory
 {
     /**
