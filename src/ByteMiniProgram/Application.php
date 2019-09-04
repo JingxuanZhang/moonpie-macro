@@ -20,6 +20,8 @@ use EasyWeChat\Kernel\ServiceContainer;
  * @property \Moonpie\Macro\ByteMiniProgram\Auth\Client                $auth
  * @property \EasyWeChat\MiniProgram\Encryptor                  $encryptor
  * @property \Moonpie\Macro\ByteMiniProgram\Storage\Client $storage
+ * @property \Moonpie\Macro\ByteMiniProgram\AppCode\Client $app_code
+ * @property \Moonpie\Macro\ByteMiniProgram\TemplateMessage\Client $template_message
  */
 class Application extends ServiceContainer
 {
@@ -28,7 +30,9 @@ class Application extends ServiceContainer
      */
     protected $providers = [
         Auth\ServiceProvider::class,
-        Storage\ServiceProvider::class
+        Storage\ServiceProvider::class,
+        TemplateMessage\ServiceProvider::class,
+        AppCode\ServiceProvider::class,
     ];
 
     /**

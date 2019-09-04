@@ -13,6 +13,7 @@
   }],
   "require": {
     "overtrue/wechat": "^4.1",
+    "php": ">=7.0",
     "ext-bcmath": "*"
   },
   "autoload": {
