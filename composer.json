@@ -20,6 +20,6 @@
     "psr-4": {
       "Moonpie\\Macro\\": "src/"
     },
-    "classmap": ["aop\\"]
+    "classmap": ["aop/"]
   }
 }
