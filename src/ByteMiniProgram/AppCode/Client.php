@@ -12,7 +12,6 @@ class Client extends BaseClient
      *
      * @param string $path
      * @param array  $optional
-     *
      * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
      */
     public function get(string $path = '', array $optional = [])
@@ -20,7 +19,8 @@ class Client extends BaseClient
         $params = array_merge([
             'path' => $path,
         ], $optional);
-        $params['access_token'] = $this->getAccessToken()->getToken();
+        $token = $this->getAccessToken();
+        $params['access_token'] = $token->getToken()[$token->getTokenKey()];
 
         return $this->getStream('apps/qrcode', $params);
     }
@@ -31,13 +31,13 @@ class Client extends BaseClient
      * @param string $endpoint
      * @param array  $params
      *
-     * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
+     * @return array|\EasyWeChat\Kernel\Support\Collection|object|StreamResponse|string
      */
     protected function getStream(string $endpoint, array $params)
     {
         $response = $this->requestRaw($endpoint, 'POST', ['json' => $params]);
 
-        if (false !== stripos($response->getHeaderLine('Content-disposition'), 'attachment')) {
+        if (false !== stripos($response->getHeaderLine('Content-Type'), 'image/png')) {
             return StreamResponse::buildFromPsrResponse($response);
         }
 
