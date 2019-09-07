@@ -29,7 +29,7 @@ class Client extends BaseClient
      */
     protected $message = [
         'touser' => '',
-        'templateId' => '',
+        'template_id' => '',
         'page' => '',
         'form_id' => '',
         'data' => [],
@@ -40,7 +40,7 @@ class Client extends BaseClient
      *
      * @var array
      */
-    protected $required = ['touser', 'templateId', 'form_id'];
+    protected $required = ['touser', 'template_id', 'form_id'];
 
 
     /**
