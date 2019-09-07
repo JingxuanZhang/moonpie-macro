@@ -3,6 +3,7 @@
 namespace Moonpie\Macro\ByteMiniProgram\TemplateMessage;
 
 use EasyWeChat\Kernel\Exceptions\InvalidArgumentException;
+use EasyWeChat\Kernel\Support\Arr;
 use Moonpie\Macro\ByteMiniProgram\Kernel\BaseClient;
 use ReflectionClass;
 
@@ -81,7 +82,8 @@ class Client extends BaseClient
 
         $params['data'] = $this->formatData($params['data'] ?? []);
 
-        $params['access_token'] = $this->getAccessToken()->getToken();
+        $token = $this->getAccessToken();
+        $params['access_token'] = Arr::get($token->getToken(), $token->getTokenKey());
         return $params;
     }
 
