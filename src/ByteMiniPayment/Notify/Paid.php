@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace app\index\service\macro\ByteMiniPayment\Notify;
+namespace Moonpie\Macro\ByteMiniPayment\Notify;
 
 use Closure;
 

@@ -9,9 +9,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace app\index\service\macro\ByteMiniPayment\Notify;
+namespace Moonpie\Macro\ByteMiniPayment\Notify;
 
-use app\index\service\macro\ByteMiniPayment\Application;
+use Moonpie\Macro\ByteMiniPayment\Application;
 use Closure;
 use EasyWeChat\Kernel\Exceptions\Exception;
 use EasyWeChat\Kernel\Support;

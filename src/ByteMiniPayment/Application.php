@@ -18,9 +18,9 @@ use EasyWeChat\Kernel\ServiceContainer;
 /**
  * Class Application.
  *
- * @property \app\index\service\macro\ByteMiniPayment\Jssdk\Client             $jssdk
- * @property \app\index\service\macro\ByteMiniPayment\Alipay\Client             $alipay
- * @property \app\index\service\macro\ByteMiniPayment\Order\Client             $order
+ * @property \Moonpie\Macro\ByteMiniPayment\Jssdk\Client             $jssdk
+ * @property \Moonpie\Macro\ByteMiniPayment\Alipay\Client             $alipay
+ * @property \Moonpie\Macro\ByteMiniPayment\Order\Client             $order
  *
  * @method mixed pay(array $attributes)
  * @method mixed authCodeToOpenid(string $authCode)
