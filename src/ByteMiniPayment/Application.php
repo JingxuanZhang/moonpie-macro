@@ -21,6 +21,7 @@ use EasyWeChat\Kernel\ServiceContainer;
  * @property \Moonpie\Macro\ByteMiniPayment\Jssdk\Client             $jssdk
  * @property \Moonpie\Macro\ByteMiniPayment\Alipay\Client             $alipay
  * @property \Moonpie\Macro\ByteMiniPayment\Order\Client             $order
+ * @property \Moonpie\Macro\ByteMiniPayment\Transfer\Client             $transfer
  *
  * @method mixed pay(array $attributes)
  * @method mixed authCodeToOpenid(string $authCode)
@@ -34,6 +35,7 @@ class Application extends ServiceContainer
         Jssdk\ServiceProvider::class,
         Alipay\ServiceProvider::class,
         Order\ServiceProvider::class,
+        Transfer\ServiceProvider::class,
     ];
 
     /**
