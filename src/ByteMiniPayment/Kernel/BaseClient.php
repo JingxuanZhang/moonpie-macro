@@ -170,4 +170,16 @@ class BaseClient
         //return $this->app->inSandbox() ? "sandboxnew/{$endpoint}" : $endpoint;
         return $endpoint;
     }
+
+    /**
+     * @param $request
+     * @param $response
+     * @return mixed
+     */
+    protected function prepareAlipayResponse($request, $response)
+    {
+        if(!$response) return false;
+        $response_key = str_replace('.', '_', $request->getApiMethodName()) . '_response';
+        return $response->{$response_key};
+    }
 }
