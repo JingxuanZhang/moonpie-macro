@@ -19,21 +19,22 @@ use Moonpie\Macro\ByteMiniProgram\Kernel\BaseClient;
 class Client extends BaseClient
 {
     /**
-     * Text content security check.
-     *
-     * @param string $text
+     * 文本信息监测
+     * @param array $text
      *
      * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function checkText(string $text)
+    public function checkText($text)
     {
+        $text = (array) $text;
         $params = [
-            'tasks' => [
-                ['content' => $text],
-            ]
+            'tasks' => []
         ];
+        foreach ($text as $txt) {
+            $params['tasks'][] = ['content' => $txt];
+        }
         $headers = $this->getAccessTokenHeaders();
 
         return $this->httpPostJsonWithHeader('v2/tags/text/antidirt', $params, $headers);
@@ -53,8 +54,7 @@ class Client extends BaseClient
     }
 
     /**
-     * Image security check.
-     *
+     * 图片内容监测
      * @param string $path
      *
      * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
@@ -68,7 +68,7 @@ class Client extends BaseClient
             'tasks' => [],
         ];
         foreach ($urls as $url) {
-            $params['tasks'] = ['image' => $url];
+            $params['tasks'][] = ['image' => $url];
         }
         $headers = $this->getAccessTokenHeaders();
         return $this->httpPostJsonWithHeader('v2/tags/image', $params, $headers);
