@@ -1,10 +1,11 @@
 <?php
-/**
- * Created by Moonpie Studio.
- * User: JohnZhang
- * Date: 2019/6/3
- * Time: 15:15
- */
+/*
+ *  Copyright (c) 2018-2019.
+ *  This file is part of the moonpie production
+ *  (c) johnzhang <875010341@qq.com>
+ *  This source file is subject to the MIT license that is bundled
+ *  with this source code in the file LICENSE.
+*/
 
 namespace Moonpie\Macro;
 

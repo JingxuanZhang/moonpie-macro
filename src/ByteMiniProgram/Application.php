@@ -1,10 +1,11 @@
 <?php
-/**
- * Created by Moonpie Studio.
- * User: JohnZhang
- * Date: 2019/6/3
- * Time: 15:24
- */
+/*
+ *  Copyright (c) 2018-2019.
+ *  This file is part of the moonpie production
+ *  (c) johnzhang <875010341@qq.com>
+ *  This source file is subject to the MIT license that is bundled
+ *  with this source code in the file LICENSE.
+*/
 
 namespace Moonpie\Macro\ByteMiniProgram;
 
@@ -22,6 +23,7 @@ use EasyWeChat\Kernel\ServiceContainer;
  * @property \Moonpie\Macro\ByteMiniProgram\Storage\Client $storage
  * @property \Moonpie\Macro\ByteMiniProgram\AppCode\Client $app_code
  * @property \Moonpie\Macro\ByteMiniProgram\TemplateMessage\Client $template_message
+ * @property \Moonpie\Macro\ByteMiniProgram\ContentSecurity\Client $content_security
  */
 class Application extends ServiceContainer
 {
@@ -33,6 +35,7 @@ class Application extends ServiceContainer
         Storage\ServiceProvider::class,
         TemplateMessage\ServiceProvider::class,
         AppCode\ServiceProvider::class,
+        ContentSecurity\ServiceProvider::class,
     ];
 
     /**

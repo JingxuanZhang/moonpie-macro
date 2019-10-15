@@ -17,4 +17,9 @@ class BaseClient extends OriginClient
     }
 
     protected $baseUri = 'https://developer.toutiao.com/api/';
+
+    protected function httpPostJsonWithHeader($url, $data = [], $headers = [], $query = [])
+    {
+        return $this->request($url, 'POST', ['query' => $query, 'json' => $data, 'headers' => $headers]);
+    }
 }
