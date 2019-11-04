@@ -15,8 +15,6 @@ use EasyWeChat\Kernel\ServiceContainer;
 /**
  * Class Application.
  *
- * @author mingyoung <mingyoungcheung@gmail.com>
- *
  * @property \Moonpie\Macro\ByteMiniProgram\Auth\AccessToken           $access_token
  * @property \Moonpie\Macro\ByteMiniProgram\Auth\Client                $auth
  * @property \EasyWeChat\MiniProgram\Encryptor                  $encryptor
@@ -36,6 +34,7 @@ class Application extends ServiceContainer
         TemplateMessage\ServiceProvider::class,
         AppCode\ServiceProvider::class,
         ContentSecurity\ServiceProvider::class,
+        Server\ServiceProvider::class
     ];
 
     /**
