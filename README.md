@@ -16,6 +16,10 @@ $official_app = Factory::officialAccount($config);
 //-----------
 
 //对于抖音应用
+$config = [
+    'app_id' => '1232j3kj2k3',
+    'secret' => 'fjsadkfjskd',
+];
 $byte_app = Factory::byteMiniProgram($config);
 $byte_payment_app = Factory::byteMiniPayment($config);
 
