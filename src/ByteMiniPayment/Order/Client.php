@@ -82,7 +82,7 @@ class Client extends BaseClient
     protected function query($param)
     {
         $client = $this->app->alipay->getAopClient();
-        Loader::import('aop.request.AlipayTradeQueryRequest');
+        //Loader::import('aop.request.AlipayTradeQueryRequest');
         $request = new \AlipayTradeQueryRequest();
         $request->setBizContent(\GuzzleHttp\json_encode($param, JSON_UNESCAPED_UNICODE));
         $response = $client->execute($request);

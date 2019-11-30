@@ -15,7 +15,6 @@
     "overtrue/wechat": "^4.1",
     "php": ">=7.0",
     "ext-bcmath": "*",
-    "topthink/framework": "^5.0.24",
     "ext-simplexml": "*",
     "ext-json": "*",
     "ext-openssl": "*"
