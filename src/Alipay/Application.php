@@ -42,4 +42,17 @@ class Application extends ServiceContainer
         }
         return $this->aopClient;
     }
+    /**
+     * @param \Closure $closure
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @codeCoverageIgnore
+     *
+     * @throws \EasyWeChat\Kernel\Exceptions\Exception
+     */
+    public function handlePaidNotify(\Closure $closure)
+    {
+        return (new Notify\Paid($this))->handle($closure);
+    }
 }

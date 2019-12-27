@@ -30,14 +30,11 @@ class Client extends BaseClient
                 throw new \RuntimeException(sprintf('require parameter "%s" is lost.', $require_key));
             }
         }
-        $client = $this->app->alipay->getAopClient();
-        Loader::import('aop.request.AlipayFundTransToaccountTransferRequest');
+        $client = $this->app->getAopClient();
         $request = new \AlipayFundTransToaccountTransferRequest();
         $request->setBizContent(json_encode($params, JSON_UNESCAPED_UNICODE));
         $response = $client->execute($request);
-        if(!$response) return false;
-        $response_key = str_replace('.', '_', $request->getApiMethodName()) . '_response';
-        return $response->{$response_key};
+        return $this->prepareAlipayResponse($request, $response);
     }
 
     /**
@@ -48,13 +45,10 @@ class Client extends BaseClient
      */
     public function queryAccountOrder(string $orderNo)
     {
-        $client = $this->app->alipay->getAopClient();
-        Loader::import('aop.request.AlipayFundTransOrderQueryRequest');
+        $client = $this->app->getAopClient();
         $request = new \AlipayFundTransOrderQueryRequest();
         $request->setBizContent(json_encode(['out_biz_no' => $orderNo]));
         $response = $client->execute($request);
-        if(!$response) return false;
-        $response_key = str_replace('.', '_', $request->getApiMethodName()) . '_response';
-        return $response->{$response_key};
+        return $this->prepareAlipayResponse($request, $response);
     }
 }

@@ -7,14 +7,6 @@
  *  with this source code in the file LICENSE.
  */
 
-/*
- * This file is part of the moonpie/macro.
- *
- * (c) moonpie<875010341@qq.com>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
 
 /**
  * app_id    string    required    N/A    是    支付分配给业务方的 id
@@ -53,22 +45,7 @@ class Client extends BaseClient
         ];
     }
 
-    /**
-     * 请求抖音小程序下单接口
-     * @param array $params
-     * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
-     * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
-     * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
-     */
-    public function create($params)
-    {
-        $params['method'] = 'tp.trade.create';
-        $params['sign_type'] = 'MD5';
-        $params['timestamp'] = $params['timestamp'] ?? time();
-        $params['merchant_id'] = $this->app['config']['mch_id'];
-        $params['notify_url'] = $params['notify_url'] ?? $this->app['config']['notify_url'];
-        return $this->request($this->wrap('gateway'), $params);
-    }
+
 
     public function queryByOutTradeNumber($orderNo)
     {
@@ -86,7 +63,7 @@ class Client extends BaseClient
 
     protected function query($param)
     {
-        $client = $this->app->alipay->getAopClient();
+        $client = $this->app->getAopClient();
         //Loader::import('aop.request.AlipayTradeQueryRequest');
         $request = new \AlipayTradeQueryRequest();
         $request->setBizContent(\GuzzleHttp\json_encode($param, JSON_UNESCAPED_UNICODE));
@@ -95,5 +72,35 @@ class Client extends BaseClient
         $result = $response->{$responseNode};
         return $result;
     }
+    /**
+     * 请求抖音小程序下单接口
+     * @param array $params
+     * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
+     * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
+     * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
+     */
+    public function createForBytePayment(array $params)
+    {
+        $params['method'] = 'tp.trade.create';
+        $params['sign_type'] = 'MD5';
+        $params['timestamp'] = $params['timestamp'] ?? time();
+        $params['merchant_id'] = $this->app['config']['mch_id'];
+        $params['notify_url'] = $params['notify_url'] ?? $this->app['config']->get('alipay.notify_url');
+        return $this->request($this->wrap('gateway'), $params);
+    }
 
+    /**
+     * 统一下单部分
+     * @param array $params
+     */
+    public function unify(array $params)
+    {
+        $alipay = $this->app->getAopClient();
+        $request = new \AlipayTradeAppPayRequest();
+        $request->setNotifyUrl($params['notify_url']);
+        $request->setProdCode('QUICK_MSECURITY_PAY');
+        $business['product_code'] = 'QUICK_MSECURITY_PAY';
+        $request->setBizContent(json_encode($business, JSON_UNESCAPED_UNICODE));
+        return $alipay->sdkExecute($request);
+    }
 }

@@ -9,16 +9,14 @@
 
 namespace Moonpie\Macro\ByteMiniPayment;
 
-use Closure;
-use EasyWeChat\Kernel\Exceptions\InvalidArgumentException;
 use EasyWeChat\Kernel\ServiceContainer;
 
 /**
  * Class Application.
  *
  * @property \Moonpie\Macro\ByteMiniPayment\Jssdk\Client             $jssdk
- * @property \Moonpie\Macro\ByteMiniPayment\Alipay\Client             $alipay
- * @property \EasyWeChat\Payment\Application                          $wepay
+ * @property \Moonpie\Macro\Alipay\Application                       $alipay
+ * @property \EasyWeChat\Payment\Application                         $wepay
  *
  * @method mixed pay(array $attributes)
  * @method mixed authCodeToOpenid(string $authCode)
@@ -43,19 +41,7 @@ class Application extends ServiceContainer
         ],
     ];
 
-    /**
-     * @param \Closure $closure
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @codeCoverageIgnore
-     *
-     * @throws \EasyWeChat\Kernel\Exceptions\Exception
-     */
-    public function handlePaidNotify(Closure $closure)
-    {
-        return (new Notify\Paid($this))->handle($closure);
-    }
+
 
     /**
      * @param string $name

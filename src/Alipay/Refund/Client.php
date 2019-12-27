@@ -11,7 +11,6 @@ namespace Moonpie\Macro\Alipay\Refund;
 
 
 use Moonpie\Macro\Alipay\Kernel\BaseClient;
-use think\Loader;
 
 class Client extends BaseClient
 {
@@ -60,8 +59,7 @@ class Client extends BaseClient
      */
     protected function handleRaiseAction(array $params)
     {
-        $client = $this->app->alipay->getAopClient();
-        Loader::import('aop.request.AlipayTradeRefundRequest');
+        $client = $this->app->getAopClient();
         $request = new \AlipayTradeRefundRequest();
         $request->setBizContent(json_encode($params, JSON_UNESCAPED_UNICODE));
         $response = $client->execute($request);
@@ -77,8 +75,7 @@ class Client extends BaseClient
      */
     protected function handleQueryAction(array $params)
     {
-        $client = $this->app->alipay->getAopClient();
-        Loader::import('aop.request.AlipayTradeFastpayRefundQueryRequest');
+        $client = $this->app->getAopClient();
         $request = new \AlipayTradeFastpayRefundQueryRequest();
         $request->setBizContent(json_encode($params, JSON_UNESCAPED_UNICODE));
         $response = $client->execute($request);
