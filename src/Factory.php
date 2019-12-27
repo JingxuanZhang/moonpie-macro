@@ -29,8 +29,9 @@ class Factory extends BasicFactory
     public static function make($name, array $config)
     {
         $namespace = Str::studly($name);
-        if (stripos($name, 'byte') === 0) {
-            $application = "\\Moonpie\\Macro\\{$namespace}\\Application";
+        $first_class = "\\Moonpie\\Macro\\{$namespace}\\Application";
+        if (class_exists($first_class)) {
+            $application = $first_class;
         } else {
             $application = "\\EasyWeChat\\{$namespace}\\Application";
         }

@@ -7,7 +7,7 @@
  *  with this source code in the file LICENSE.
  */
 
-namespace Moonpie\Macro\ByteMiniPayment\Alipay;
+namespace Moonpie\Macro\ByteMiniPayment\Wechat;
 
 
 use Moonpie\Macro\Factory;
@@ -18,8 +18,8 @@ class ServiceProvider implements ServiceProviderInterface
 {
     public function register(Container $app)
     {
-        $app['alipay'] = function (Container $app) {
-            return Factory::alipay($app->config->get('alipay'));
+        $app['wepay'] = function (Container $app) {
+            return Factory::payment($app->config->get('wechat'));
         };
     }
 

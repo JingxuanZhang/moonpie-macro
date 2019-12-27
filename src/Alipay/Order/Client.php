@@ -1,4 +1,11 @@
 <?php
+/**
+ * Copyright (c) 2018-2019.
+ * This file is part of the moonpie production
+ *   (c) johnzhang <875010341@qq.com>
+ *   This source file is subject to the MIT license that is bundled
+ *  with this source code in the file LICENSE.
+ */
 
 /*
  * This file is part of the moonpie/macro.
@@ -27,12 +34,10 @@
  * show_url    string    optional    N/A    否    (支付宝)支付失败返回的地址
  */
 
-namespace Moonpie\Macro\ByteMiniPayment\Order;
+namespace Moonpie\Macro\Alipay\Order;
 
 
-use Moonpie\Macro\ByteMiniPayment\Kernel\BaseClient;
-use EasyWeChat\Kernel\Support;
-use think\Loader;
+use Moonpie\Macro\Alipay\Kernel\BaseClient;
 
 /**
  * 这里模拟使用抖音的前端调用支付功能

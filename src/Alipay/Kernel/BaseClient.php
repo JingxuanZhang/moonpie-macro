@@ -1,15 +1,16 @@
 <?php
 /**
- * Created by Moonpie Studio.
- * User: JohnZhang
- * Date: 2019/6/6
- * Time: 8:42
+ * Copyright (c) 2018-2019.
+ * This file is part of the moonpie production
+ *   (c) johnzhang <875010341@qq.com>
+ *   This source file is subject to the MIT license that is bundled
+ *  with this source code in the file LICENSE.
  */
 
-namespace Moonpie\Macro\ByteMiniPayment\Kernel;
+namespace Moonpie\Macro\Alipay\Kernel;
 
 
-use Moonpie\Macro\ByteMiniPayment\Application;
+use Moonpie\Macro\Alipay\Application;
 use EasyWeChat\Kernel\Traits\HasHttpRequests;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;

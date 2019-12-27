@@ -18,9 +18,7 @@ use EasyWeChat\Kernel\ServiceContainer;
  *
  * @property \Moonpie\Macro\ByteMiniPayment\Jssdk\Client             $jssdk
  * @property \Moonpie\Macro\ByteMiniPayment\Alipay\Client             $alipay
- * @property \Moonpie\Macro\ByteMiniPayment\Order\Client             $order
- * @property \Moonpie\Macro\ByteMiniPayment\Transfer\Client             $transfer
- * @property \Moonpie\Macro\ByteMiniPayment\Refund\Client             $refund
+ * @property \EasyWeChat\Payment\Application                          $wepay
  *
  * @method mixed pay(array $attributes)
  * @method mixed authCodeToOpenid(string $authCode)
@@ -33,9 +31,7 @@ class Application extends ServiceContainer
     protected $providers = [
         Jssdk\ServiceProvider::class,
         Alipay\ServiceProvider::class,
-        Order\ServiceProvider::class,
-        Transfer\ServiceProvider::class,
-        Refund\ServiceProvider::class,
+        Wechat\ServiceProvider::class,
     ];
 
     /**
@@ -59,81 +55,6 @@ class Application extends ServiceContainer
     public function handlePaidNotify(Closure $closure)
     {
         return (new Notify\Paid($this))->handle($closure);
-    }
-
-    /**
-     * @param \Closure $closure
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @codeCoverageIgnore
-     *
-     * @throws \EasyWeChat\Kernel\Exceptions\Exception
-     */
-    public function handleRefundedNotify(Closure $closure)
-    {
-        return (new Notify\Refunded($this))->handle($closure);
-    }
-
-    /**
-     * @param \Closure $closure
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @codeCoverageIgnore
-     *
-     * @throws \EasyWeChat\Kernel\Exceptions\Exception
-     */
-    public function handleScannedNotify(Closure $closure)
-    {
-        return (new Notify\Scanned($this))->handle($closure);
-    }
-
-    /**
-     * Set sub-merchant.
-     *
-     * @param string      $mchId
-     * @param string|null $appId
-     *
-     * @return $this
-     */
-    public function setSubMerchant(string $mchId, string $appId = null)
-    {
-        $this['config']->set('sub_mch_id', $mchId);
-        $this['config']->set('sub_appid', $appId);
-
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function inSandbox(): bool
-    {
-        return (bool) $this['config']->get('sandbox');
-    }
-
-    /**
-     * @param string|null $endpoint
-     *
-     * @return string
-     *
-     * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
-     */
-    public function getKey(string $endpoint = null)
-    {
-        if ('sandboxnew/pay/getsignkey' === $endpoint) {
-            return $this['config']->key;
-        }
-
-        //$key = $this->inSandbox() ? $this['sandbox']->getKey() : $this['config']->key;
-        $key = $this['config']->key;
-
-        /*if (32 !== strlen($key)) {
-            throw new InvalidArgumentException(sprintf("'%s' should be 32 chars length.", $key));
-        }*/
-
-        return $key;
     }
 
     /**
