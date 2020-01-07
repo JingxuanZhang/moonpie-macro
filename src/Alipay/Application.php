@@ -36,11 +36,15 @@ class Application extends ServiceContainer
             $this->aopClient->rsaPrivateKeyFilePath = $this->config['rsa_private_file'];
             $this->aopClient->signType = $this->config->get('sign_type', 'RSA');
             $this->aopClient->alipayPublicKey = $this->config['ali_public_file'];
-            if ($this->app->inSandbox()) {
+            if ($this->inSandbox()) {
                 $this->aopClient->gatewayUrl = 'https://openapi.alipaydev.com/gateway.do';
             }
         }
         return $this->aopClient;
+    }
+    public function inSandbox()
+    {
+        return $this->config->has('in_sandbox') && $this->config->get('in_sandbox');
     }
     /**
      * @param \Closure $closure
