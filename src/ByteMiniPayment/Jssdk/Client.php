@@ -147,31 +147,35 @@ class Client extends BaseClient
             'subject' => '', 'body' => '', 'out_order_no' => '',
             'trade_time' => $now, 'valid_time' => 600, 'notify_url' => $notifyUrl,
         ];
-        if(empty($params['notify_url'])) $params['notify_url'] = 'moonpie-alipay';
-        $params = array_merge($request, $params);
+        if (empty($params['notify_url'])) $params['notify_url'] = 'moonpie-alipay';
+        $params = array_merge($params, $request);
         //验证模式下的必要信息
         switch ($service) {
             case static::PAY_SERVICE_ALIPAY:
-                if(empty($params['alipay_url'])) {
+                if (empty($params['alipay_url'])) {
                     throw new InvalidConfigException('When Use Alipay, Please Provider The "alipay_url" Field');
                 }
                 break;
             case static::PAY_SERVICE_WEPAY:
-                if(empty($params['wx_url'])) {
+                if (empty($params['wx_url'])) {
                     throw new InvalidConfigException('When Use Wechat Payment, Please Provider The "wx_url" Field');
                 }
                 $params['wx_type'] = 'MWEB';
                 break;
             default:
-                if(empty($params['alipay_url']) && empty($params['wx_url'])) {
+                if (empty($params['alipay_url']) && empty($params['wx_url'])) {
                     throw new InvalidConfigException('When Use Common Platform Payment, Please Provider The "alipay_url" or "wx_url" Field');
                 }
-                if(!empty($params['wx_url'])) $params['wx_type'] = 'MWEB';
+                if (!empty($params['wx_url'])) $params['wx_type'] = 'MWEB';
                 break;
         }
         $params['sign'] = $this->generate_sign_new($params, $this->app->config['key'], 'md5');
-//risk_info	string	required	否	N/A
+        $config = [
+            'orderInfo' => $params, 'service' => $service,
+        ];
+        return $config;
     }
+
     protected function generate_sign_new(array $params, string $key, string $encryptMethod): string
     {
         $except_keys = ['risk_info', 'sign'];

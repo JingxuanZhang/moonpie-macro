@@ -19,7 +19,10 @@ class ServiceProvider implements ServiceProviderInterface
     public function register(Container $app)
     {
         $app['alipay'] = function (Container $app) {
-            return Factory::alipay($app->config->get('alipay'));
+            if($app->config->has('alipay')) {
+                return Factory::alipay($app->config->get('alipay'));
+            }
+            return null;
         };
     }
 

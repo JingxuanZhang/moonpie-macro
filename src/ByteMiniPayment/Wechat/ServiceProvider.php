@@ -19,7 +19,10 @@ class ServiceProvider implements ServiceProviderInterface
     public function register(Container $app)
     {
         $app['wepay'] = function (Container $app) {
-            return Factory::payment($app->config->get('wechat'));
+            if($app->config->has('wechat')) {
+                return Factory::payment($app->config->get('wechat'));
+            }
+            return null;
         };
     }
 
