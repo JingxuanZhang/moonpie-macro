@@ -182,7 +182,7 @@ abstract class Handler
      */
     protected function validate(array $message)
     {
-        $client = $this->app->alipay->getAopClient();
+        $client = $this->app->getAopClient();
         $result = $client->rsaCheckV1($message, $client->alipayPublicKey, $client->signType);
         if (true !== $result) {
             throw new InvalidSignException();
