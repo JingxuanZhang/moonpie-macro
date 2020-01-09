@@ -19,9 +19,6 @@
     "ext-json": "*",
     "ext-openssl": "*"
   },
-  "conflict": {
-    "moonpie/macro": "v1.0.0"
-  },
   "autoload": {
     "psr-4": {
       "Moonpie\\Macro\\": "src/"
