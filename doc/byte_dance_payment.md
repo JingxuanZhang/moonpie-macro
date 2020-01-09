@@ -63,7 +63,7 @@ $params = [
     'body' => $this->getPaymentExtra( 'body', $this->getTransBody()),	//String	必选	200	商户订单详情
     //'pay_discount	String	可选	1000	折扣 格式（3段）:订单号^金额^方式|订单号^金额^方式。 方式目前仅支持红包: coupon如：423423^1^coupon。 可选，目前暂不支持	combine
     'trade_time' => time(), //trade_time	String	必选	14	下单时间戳，unix时间戳
-    'valid_time' => time() + 3600, //valid_time	String	必选	14	订单有效时间（单位 秒）	15
+    'valid_time' => 3600, //valid_time	String	必选	14	订单有效时间（单位 秒）	15
     //notify_url	String	必选	500	服务器异步通知http地址
     //service_fee	String	可选	20	平台手续费
     //risk_info	String	必选	2048	风控信息，标准的json字符串格式，目前需要传入用户的真实ip和device_id： "{"ip":"123.123.123.1", "device_id":"1234"}"	{"ip":"123.123.123.1", "device_id":"1234"}
@@ -74,9 +74,9 @@ $params = [
     ]),
     'notify_url' => $this->getCallbackUrl(),
 ];
-$response = $app->order->create($params);
+$response = $app->jssdk->platformRequestConfig(1, $openid, $amount, $params);
 ```
-### 支付回调响应
+### (支付宝)支付回调响应
 ```php
 $response = $app->handlePaidNotify(function ($message, $fail)use($app) {
      //return $fail('handle success');
@@ -84,4 +84,11 @@ $response = $app->handlePaidNotify(function ($message, $fail)use($app) {
 });
 $response->send();
 ```
+### (微信)支付回调响应
+```php
+$response = $app->wepay->handlePaidNotify(function ($message, $fail)use($app) {
+     //return $fail('handle success');
+    return true;
+});
+$response->send();
 看着和EasyWechat的一样，这就对了，这就是我们的目标
