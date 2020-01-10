@@ -50,8 +50,8 @@ $config = [
 ];
 $app = Factory::byteMiniPayment($config);
 ```
-### 调用支付宝发起支付
-#### 封装自[官方文档](https://developer.toutiao.com/docs/payment/#%E7%BB%99%E5%BC%80%E5%8F%91%E8%80%85%E4%BD%BF%E7%94%A8%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8B%E5%8D%95%E6%8E%A5%E5%8F%A3)
+### 调用tt.pay发起支付
+#### 封装自[官方文档](https://microapp.bytedance.com/dev/cn/mini-app/develop/open-capacity/payment/tt.pay)
 ```php
 
 $params = [
@@ -61,16 +61,11 @@ $params = [
     'currency' => 'CNY', //	String	必选	9	币种	CNY
     'subject' => $this->getPaymentExtra( 'subject', $this->getTransBody()), //subject	String	必选	200	商户订单名称
     'body' => $this->getPaymentExtra( 'body', $this->getTransBody()),	//String	必选	200	商户订单详情
-    //'pay_discount	String	可选	1000	折扣 格式（3段）:订单号^金额^方式|订单号^金额^方式。 方式目前仅支持红包: coupon如：423423^1^coupon。 可选，目前暂不支持	combine
     'trade_time' => time(), //trade_time	String	必选	14	下单时间戳，unix时间戳
     'valid_time' => 3600, //valid_time	String	必选	14	订单有效时间（单位 秒）	15
-    //notify_url	String	必选	500	服务器异步通知http地址
-    //service_fee	String	可选	20	平台手续费
-    //risk_info	String	必选	2048	风控信息，标准的json字符串格式，目前需要传入用户的真实ip和device_id： "{"ip":"123.123.123.1", "device_id":"1234"}"	{"ip":"123.123.123.1", "device_id":"1234"}
-    //ext_param	String	可选	1024	扩展参数，json格式， 用来上送商户自定义信息
     'risk_info' => json_encode([
         'ip' => request()->ip(),
-        'device_id' => $this->getPaymentExtra('device_id', '10093920932'),
+        'device_id' => $this->getPaymentExtra('device_id', '29329392093'),
     ]),
     'notify_url' => $this->getCallbackUrl(),
 ];
